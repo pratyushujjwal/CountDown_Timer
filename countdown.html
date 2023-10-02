@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>countDown</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+        
+        body {
+            background-color: rgb(218, 229, 235);
+        }
+        
+        #count {
+            display: block;
+            font-size: 64px;
+            width: 800px;
+            height: auto;
+            margin-top: 40px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 14px 32px;
+            text-align: center;
+            font-weight: 500;
+            /* color: white; */
+            background-color: rgb(176, 176, 234);
+            border: 2px solid gray;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="count"></div>
+    <script>
+        var countdate = new Date("Jan 1 2024 11:59:00").getTime();
+        var timer = setInterval(function() {
+            var newdate = new Date().getTime();
+            var diff = countdate - newdate;
+
+            var day = Math.floor(diff / (1000 * 60 * 60 * 24));
+            var hour = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var min = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            var second = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById("count").innerHTML = day + "d " + hour + "h " + min + "m " + second + "s";
+
+            if (diff < 0) {
+                clearInterval(timer);
+                document.getElementById("count").innerHTML = "EXPIRED";
+            }
+        }, 1000);
+    </script>
+</body>
+
+</html>
